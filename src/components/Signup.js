@@ -3,28 +3,30 @@ import React, { useState } from 'react'
 export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleSignup = (e) => {
     e.preventDefault();
-    if(email.trim === "" || password.trim === "") {
-      setError("Please enter both email and password");
+    if( !email || !password ) {
+      setErrorMsg("Please enter both email and password");
       return;
     }
     console.log("Email: ", email);
     console.log("password: ", password);
-
-
+    
+    
     //onSubmit 
     setEmail("");
     setPassword("");
-    setError("");
+    setErrorMsg("");
   };
-
+  
   return (
     <div>
       <h2>Signup Page</h2>
+      {errorMsg && <p>{errorMsg}</p>}
       <form onSubmit={handleSignup}>
+
 
         <div>
           <label>Email:</label>
@@ -45,8 +47,8 @@ export default function Signup() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        {error && <p>{error}</p>}
-        <button type='submit' disabled={email.trim === "" || password.trim === ""}>Signup</button>
+
+        <button type='submit'>Signup</button>
 
       </form>
     </div>
